@@ -9,15 +9,11 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ICCCMFocus
-import XMonad.Hooks.XPropManage
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Gaps
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
-import qualified XMonad.StackSet as W
-import XMonad.StackSet(stack)
-import XMonad.Actions.TagWindows
 
 -- Use windows key for mod
 myModMask = mod4Mask
@@ -44,15 +40,12 @@ ws_communications = "4:com"
 myWorkspaces = [ ws_network, ws_web, ws_dev, ws_communications ] ++ map show [5..9]
 
 -- special application rules
-myManageHook = ( composeAll
+myManageHook = composeAll
     [ title     =? "mutt"               --> doShift ws_communications
     , className =? "Chromium"           --> doShift ws_web
     , className =? "Firefox"            --> doShift ws_web
     , className =? "jetbrains-idea-ce"  --> doShift ws_dev
-    ] ) <+> xPropManageHook xPropMatches
-
-xPropMatches :: [XPropMatch]
-xPropMatches = [ ([ (wM_NAME, any ("mutt"==))], pmX(addTag "mail")) ]
+    ]
 
 main = do
   xmproc <- spawnPipe "/usr/bin/xmobar /home/chris/.xmonad/xmobarrc"
@@ -75,5 +68,4 @@ main = do
     [ ((myModMask .|. shiftMask,  xK_z),      spawn "xscreensaver-command -lock")
     , ((controlMask,              xK_Print),  spawn "sleep 0.2; scrot -s")
     , ((0,                        xK_Print),  spawn "scrot")
-    , ((myModMask,                xK_m),      focusUpTaggedGlobal "mail")
     ]
