@@ -1,0 +1,23 @@
+Config { font = "xft:Monospace:pixelsize=11"
+       , commands = [ Run Weather "KLGU" ["-t"," <tempF>F","-L","40","-H","77","--normal","green","--high","red","--low","lightblue"] 36000
+                    , Run MultiCpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Swap [] 10
+                    , Run Date "%a %b %_d %l:%M" "date" 10
+                    , Run Network "eth0" [] 10
+                    , Run Wireless "wlan0" [] 600
+                    , Run BatteryP ["BAT0"] 
+                             [ "-t", "<acstatus><watts> (<left>%)"
+                             , "-L", "10", "-H", "80", "-p", "3"
+                             , "--", "-O", "<fc=green>On</fc> - ", "-o", ""
+                             , "-L", "-15", "-H", "-5"
+                             , "-l", "red", "-m", "blue", "-h", "green"
+                             ]
+                             600
+                    , Run StdinReader
+                    , Run CommandReader "/usr/bin/ledmon" "LED"
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ <fc=#ffff00>%LED%</fc> %battery% | %wlan0wi% - %eth0% | %multicpu% | %memory% * %swap%    <fc=#ee9a00>%date%</fc> | %KLGU%"
+       }
