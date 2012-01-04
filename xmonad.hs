@@ -14,8 +14,10 @@ import XMonad.Layout.DragPane
 import XMonad.Layout.Gaps
 import XMonad.Layout.Named
 import XMonad.Layout.NoBorders
+import XMonad.Layout.PerWorkspace
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.StackTile
+import XMonad.Layout.Tabbed
 import XMonad.Layout.WindowNavigation
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
@@ -56,10 +58,11 @@ myManageHook = composeAll
     ]
 
 -- layout
-myLayout = tiled ||| noBorders Full ||| wmii
+myLayout = tiled ||| noBorders Full ||| wmii ||| tab
   where
     tiled = named "Default" (ResizableTall 1 (1/100) (1/2) [])
     wmii = windowNavigation (named "Wmii" (combineTwo (dragPane Vertical 0.01 0.5) (Accordion) (Accordion)))
+    tab = named "Tabbed" (tabbed shrinkText defaultTheme)
 
 main = do
   xmproc <- spawnPipe "/usr/bin/xmobar /home/chris/.xmonad/xmobarrc"
@@ -97,7 +100,7 @@ main = do
     , ((myModMask .|. shiftMask,  xK_Up   ),  sendMessage $ Move U)
     , ((myModMask .|. shiftMask,  xK_Down ),  sendMessage $ Move D)
 
-    -- keybindings for searching
+    -- Keybindings for searching
     , ((myModMask,                xK_s),      SM.submap $ searchEngineMap $ S.promptSearch P.defaultXPConfig)
     , ((myModMask .|. shiftMask,  xK_s),      SM.submap $ searchEngineMap $ S.selectSearch)
     ]
