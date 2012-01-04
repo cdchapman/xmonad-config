@@ -9,7 +9,9 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ICCCMFocus
+import XMonad.Layout.Dishes
 import XMonad.Layout.NoBorders
+import XMonad.Layout.ResizableTile
 import XMonad.Layout.Gaps
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
@@ -36,8 +38,9 @@ ws_network        = "1:net"
 ws_web            = "2:web"
 ws_dev            = "3:dev"
 ws_communications = "4:com"
+ws_pentesting     = "10:pen"
 
-myWorkspaces = [ ws_network, ws_web, ws_dev, ws_communications ] ++ map show [5..9]
+myWorkspaces = [ ws_network, ws_web, ws_dev, ws_communications ] ++ map show [5..9] ++ [ ws_pentesting ]
 
 -- special application rules
 myManageHook = composeAll
@@ -47,6 +50,9 @@ myManageHook = composeAll
     , className =? "jetbrains-idea-ce"  --> doShift ws_dev
     ]
 
+-- layout
+myLayout = ResizableTall 1 (3/100) (1/2) [] ||| Dishes 2 (1/6) ||| noBorders Full
+
 main = do
   xmproc <- spawnPipe "/usr/bin/xmobar /home/chris/.xmonad/xmobarrc"
   xmonad $ defaultConfig 
@@ -55,7 +61,7 @@ main = do
     , terminal = myTerminal
     , workspaces = myWorkspaces
     , manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig
-    , layoutHook = avoidStruts $ layoutHook defaultConfig
+    , layoutHook = avoidStruts $ myLayout
     , logHook = do
             dynamicLogWithPP $ xmobarPP
                 { ppOutput = hPutStrLn xmproc
@@ -68,4 +74,6 @@ main = do
     [ ((myModMask .|. shiftMask,  xK_z),      spawn "xscreensaver-command -lock")
     , ((controlMask,              xK_Print),  spawn "sleep 0.2; scrot -s")
     , ((0,                        xK_Print),  spawn "scrot")
+    , ((myModMask,                xK_a),      sendMessage MirrorShrink)
+    , ((myModMask,                xK_z),      sendMessage MirrorExpand)
     ]
