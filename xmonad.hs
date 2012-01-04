@@ -109,4 +109,5 @@ searchEngineMap method = M.fromList $
     [ ((0, xK_g), method S.google)
     , ((0, xK_w), method S.wikipedia)
     , ((0, xK_d), method S.dictionary)
+    , ((0, xK_t), method S.thesaurus)
     ]
