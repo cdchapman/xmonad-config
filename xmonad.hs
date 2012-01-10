@@ -41,20 +41,30 @@ myLogHook = takeTopFocus
 myStartupHook = setWMName "LG3D"
 
 -- my workspaces
-ws_network        = "1:net"
-ws_web            = "2:web"
-ws_dev            = "3:dev"
-ws_communications = "4:com"
-ws_pentesting     = "10:pen"
+ws_network        = "α"
+ws_web            = "β"
+ws_dev            = "γ"
+ws_webdev         = "δ"
+ws_communications = "ε"
+ws_gtd            = "ζ"
 
-myWorkspaces = [ ws_network, ws_web, ws_dev, ws_communications ] ++ map show [5..9] ++ [ ws_pentesting ]
+ws_pentesting     = "ω"
+
+myWorkspaces = [ ws_network, ws_web, ws_dev, ws_webdev, ws_communications, ws_gtd ] 
+               ++ 
+               ["η", "θ", "ι"] 
+               ++ 
+               [ ws_pentesting ]
 
 -- special application rules
 myManageHook = composeAll
     [ title     =? "mutt"               --> doShift ws_communications
+    , title     =? "wyrd"               --> doShift ws_gtd
     , className =? "Chromium"           --> doShift ws_web
     , className =? "Firefox"            --> doShift ws_web
     , className =? "jetbrains-idea-ce"  --> doShift ws_dev
+    , className =? "VirtualBox"         --> doFloat
+    , className =? "Xmessage"           --> doFloat
     ]
 
 -- layout
