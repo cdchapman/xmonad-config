@@ -47,12 +47,13 @@ ws_dev            = "γ"
 ws_webdev         = "δ"
 ws_communications = "ε"
 ws_gtd            = "ζ"
+ws_top            = "η"
 
 ws_pentesting     = "ω"
 
-myWorkspaces = [ ws_network, ws_web, ws_dev, ws_webdev, ws_communications, ws_gtd ] 
+myWorkspaces = [ ws_network, ws_web, ws_dev, ws_webdev, ws_communications, ws_gtd, ws_top ] 
                ++ 
-               ["η", "θ", "ι"] 
+               ["θ", "ι"] 
                ++ 
                [ ws_pentesting ]
 
@@ -60,11 +61,13 @@ myWorkspaces = [ ws_network, ws_web, ws_dev, ws_webdev, ws_communications, ws_gt
 myManageHook = composeAll
     [ title     =? "mutt"               --> doShift ws_communications
     , title     =? "wyrd"               --> doShift ws_gtd
+    , title     =? "htop"               --> doShift ws_top
     , className =? "Chromium"           --> doShift ws_web
     , className =? "Firefox"            --> doShift ws_web
     , className =? "jetbrains-idea-ce"  --> doShift ws_dev
     , className =? "VirtualBox"         --> doFloat
     , className =? "Xmessage"           --> doFloat
+    , className =? "XCalc"              --> doFloat
     ]
 
 -- layout
