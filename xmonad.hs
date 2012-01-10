@@ -61,6 +61,7 @@ myWorkspaces = [ ws_network, ws_web, ws_dev, ws_webdev, ws_communications, ws_gt
 myManageHook = composeAll
     [ title     =? "mutt"               --> doShift ws_communications
     , title     =? "wyrd"               --> doShift ws_gtd
+    , title     =? "task"               --> doShift ws_gtd
     , title     =? "htop"               --> doShift ws_top
     , className =? "Chromium"           --> doShift ws_web
     , className =? "Firefox"            --> doShift ws_web
@@ -71,11 +72,10 @@ myManageHook = composeAll
     ]
 
 -- layout
-myLayout = tiled ||| noBorders Full ||| wmii ||| tab
+myLayout = tiled ||| noBorders Full ||| wmii
   where
     tiled = named "Default" (ResizableTall 1 (1/100) (1/2) [])
     wmii = windowNavigation (named "Wmii" (combineTwo (dragPane Vertical 0.01 0.5) (Accordion) (Accordion)))
-    tab = named "Tabbed" (tabbed shrinkText defaultTheme)
 
 main = do
   xmproc <- spawnPipe "/usr/bin/xmobar /home/chris/.xmonad/xmobarrc"
