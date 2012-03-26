@@ -113,6 +113,9 @@ main = do
     , ((myModMask .|. shiftMask,  xK_Up   ),  sendMessage $ Move U)
     , ((myModMask .|. shiftMask,  xK_Down ),  sendMessage $ Move D)
 
+    -- Keys for toggling struts
+    , ((myModMask,                xK_b    ),  sendMessage ToggleStruts)
+
     -- Keybindings for searching
     , ((myModMask,                xK_s),      SM.submap $ searchEngineMap $ S.promptSearch P.defaultXPConfig)
     , ((myModMask .|. shiftMask,  xK_s),      SM.submap $ searchEngineMap $ S.selectSearch)
