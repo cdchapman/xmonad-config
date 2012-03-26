@@ -23,11 +23,6 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
 
-import qualified Data.Map              as M
-import qualified XMonad.Prompt         as P
-import qualified XMonad.Actions.Submap as SM
-import qualified XMonad.Actions.Search as S
-
 -- Use windows key for mod
 myModMask = mod4Mask
 
@@ -116,14 +111,4 @@ main = do
     -- Keys for toggling struts
     , ((myModMask,                xK_b    ),  sendMessage ToggleStruts)
 
-    -- Keybindings for searching
-    , ((myModMask,                xK_s),      SM.submap $ searchEngineMap $ S.promptSearch P.defaultXPConfig)
-    , ((myModMask .|. shiftMask,  xK_s),      SM.submap $ searchEngineMap $ S.selectSearch)
-    ]
-
-searchEngineMap method = M.fromList $
-    [ ((0, xK_g), method S.google)
-    , ((0, xK_w), method S.wikipedia)
-    , ((0, xK_d), method S.dictionary)
-    , ((0, xK_t), method S.thesaurus)
     ]
