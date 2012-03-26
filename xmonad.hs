@@ -64,6 +64,7 @@ myManageHook = composeAll
     , className =? "VirtualBox"         --> doFloat
     , className =? "Xmessage"           --> doFloat
     , className =? "XCalc"              --> doFloat
+    , className =? "draftsight.bin"     --> doFloat
     ]
 
 -- layout
