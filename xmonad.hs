@@ -18,6 +18,7 @@ import XMonad.Layout.PerWorkspace
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.StackTile
 import XMonad.Layout.Tabbed
+import XMonad.Layout.ThreeColumns
 import XMonad.Layout.WindowNavigation
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
@@ -68,10 +69,11 @@ myManageHook = composeAll
     ]
 
 -- layout
-myLayout = tiled ||| noBorders Full ||| wmii
+myLayout = tiled ||| noBorders Full ||| wmii ||| three
   where
     tiled = named "Default" (ResizableTall 1 (1/100) (1/2) [])
     wmii = windowNavigation (named "Wmii" (combineTwo (dragPane Vertical 0.01 0.5) (Accordion) (Accordion)))
+    three = named "Buff" (ThreeColMid 1 (3/100) (1/2))
 
 main = do
   xmproc <- spawnPipe "/usr/bin/xmobar /home/chris/.xmonad/xmobarrc"
