@@ -37,17 +37,17 @@ myLogHook = takeTopFocus
 myStartupHook = setWMName "LG3D"
 
 -- my workspaces
-ws_network        = "α"
+ws_gtd            = "α"
 ws_web            = "β"
 ws_dev            = "γ"
 ws_webdev         = "δ"
 ws_communications = "ε"
-ws_gtd            = "ζ"
+ws_network        = "ζ"
 ws_top            = "η"
 
 ws_pentesting     = "ω"
 
-myWorkspaces = [ ws_network, ws_web, ws_dev, ws_webdev, ws_communications, ws_gtd, ws_top ] 
+myWorkspaces = [ ws_gtd, ws_web, ws_dev, ws_webdev, ws_communications, ws_network, ws_top ] 
                ++ 
                ["θ", "ι"] 
                ++ 
