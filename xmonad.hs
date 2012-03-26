@@ -69,7 +69,7 @@ myManageHook = composeAll
     ]
 
 -- layout
-myLayout = tiled ||| noBorders Full ||| wmii ||| three
+myLayout = tiled ||| noBorders Full ||| three ||| wmii
   where
     tiled = named "Default" (ResizableTall 1 (1/100) (1/2) [])
     wmii = windowNavigation (named "Wmii" (combineTwo (dragPane Vertical 0.01 0.5) (Accordion) (Accordion)))
