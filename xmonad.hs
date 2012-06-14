@@ -8,16 +8,12 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ICCCMFocus
 import XMonad.Hooks.SetWMName
-import XMonad.Layout.Accordion
-import XMonad.Layout.Combo
 import XMonad.Layout.DragPane
 import XMonad.Layout.Gaps
 import XMonad.Layout.Named
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.ResizableTile
-import XMonad.Layout.StackTile
-import XMonad.Layout.Tabbed
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.WindowNavigation
 import XMonad.Util.Run(spawnPipe)
@@ -72,10 +68,9 @@ myManageHook = composeAll
     ]
 
 -- layout
-myLayout = tiled ||| noBorders Full ||| three ||| wmii
+myLayout = tiled ||| noBorders Full ||| three
   where
     tiled = named "Default" (ResizableTall 1 (1/100) (1/2) [])
-    wmii = windowNavigation (named "Wmii" (combineTwo (dragPane Vertical 0.01 0.5) (Accordion) (Accordion)))
     three = named "Buff" (ThreeColMid 1 (3/100) (1/2))
 
 main = do
