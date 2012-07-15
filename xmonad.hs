@@ -65,6 +65,7 @@ myManageHook = composeAll
     , className =? "Cinelerra"          --> doFloat
     , className =? "CinePaint"          --> doFloat
     , className =? "Synfigstudio"       --> doFloat
+    , className =? "fontforge"          --> doFloat
     ]
 
 -- layout
