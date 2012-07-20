@@ -45,14 +45,11 @@ ws_webdev         = "δ"
 ws_communications = "ε"
 ws_network        = "ζ"
 ws_top            = "η"
-
+ws_raster         = "θ"
+ws_vector         = "ι"
 ws_pentesting     = "ω"
 
-myWorkspaces = [ ws_gtd, ws_web, ws_dev, ws_webdev, ws_communications, ws_network, ws_top ] 
-               ++ 
-               ["θ", "ι"] 
-               ++ 
-               [ ws_pentesting ]
+myWorkspaces = [ ws_gtd, ws_web, ws_dev, ws_webdev, ws_communications, ws_network, ws_top, ws_raster, ws_vector, ws_pentesting ]
 
 -- special application rules
 myManageHook = composeAll
