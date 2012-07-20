@@ -27,6 +27,10 @@ myModMask = mod4Mask
 -- Terminal emulator
 myTerminal = "urxvtc"
 
+-- Whether focus follows the mouse pointer.
+myFocusFollowsMouse :: Bool
+myFocusFollowsMouse = False
+
 -- Fixes JAVA Swing applications with taking and losing focus.
 myLogHook = takeTopFocus
 
@@ -81,6 +85,7 @@ main = do
     { borderWidth = 2
     , modMask = myModMask
     , terminal = myTerminal
+    , focusFollowsMouse = myFocusFollowsMouse
     , workspaces = myWorkspaces
     , handleEventHook = fullscreenEventHook
     , manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig
