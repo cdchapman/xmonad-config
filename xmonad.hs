@@ -12,7 +12,6 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.DragPane
 import XMonad.Layout.Gaps
 import XMonad.Layout.Named
-import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.ThreeColumns
@@ -73,7 +72,7 @@ myManageHook = composeAll
     ]
 
 -- layout
-myLayout = tiled ||| noBorders Full ||| three
+myLayout = tiled ||| Full ||| three
   where
     tiled = named "Default" (ResizableTall 1 (1/100) (1/2) [])
     three = named "Buff" (ThreeColMid 1 (3/100) (1/2))
