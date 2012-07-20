@@ -8,6 +8,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.ICCCMFocus
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.DragPane
 import XMonad.Layout.Gaps
 import XMonad.Layout.Named
@@ -81,6 +82,7 @@ main = do
     , modMask = myModMask
     , terminal = myTerminal
     , workspaces = myWorkspaces
+    , handleEventHook = fullscreenEventHook
     , manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig
     , layoutHook = avoidStruts $ myLayout
     , logHook = do
