@@ -97,25 +97,28 @@ main = do
     , startupHook = myStartupHook
     }
     `additionalKeys`
-    [ ((myModMask .|. shiftMask,  xK_z),      spawn "xscreensaver-command -lock")
-    , ((myModMask,                xK_Print),  spawn "scrot -b -s")
-    , ((0,                        xK_Print),  spawn "scrot")
+    [ ((myModMask .|. shiftMask,  xK_z      ),  spawn "xscreensaver-command -lock")
+    , ((myModMask,                xK_Print  ),  spawn "scrot -b -s")
+    , ((0,                        xK_Print  ),  spawn "scrot")
 
     -- Keys for ResizableTall layout
     , ((myModMask,                xK_a),      sendMessage MirrorShrink)
     , ((myModMask,                xK_z),      sendMessage MirrorExpand)
 
     -- Keys for WindowNavigation
-    , ((myModMask,                xK_Right),  sendMessage $ Go R)
-    , ((myModMask,                xK_Left ),  sendMessage $ Go L)
-    , ((myModMask,                xK_Up   ),  sendMessage $ Go U)
-    , ((myModMask,                xK_Down ),  sendMessage $ Go D)
-    , ((myModMask .|. shiftMask,  xK_Right),  sendMessage $ Move R)
-    , ((myModMask .|. shiftMask,  xK_Left ),  sendMessage $ Move L)
-    , ((myModMask .|. shiftMask,  xK_Up   ),  sendMessage $ Move U)
-    , ((myModMask .|. shiftMask,  xK_Down ),  sendMessage $ Move D)
+    , ((myModMask,                xK_Right  ),  sendMessage $ Go R)
+    , ((myModMask,                xK_Left   ),  sendMessage $ Go L)
+    , ((myModMask,                xK_Up     ),  sendMessage $ Go U)
+    , ((myModMask,                xK_Down   ),  sendMessage $ Go D)
+    , ((myModMask .|. shiftMask,  xK_Right  ),  sendMessage $ Move R)
+    , ((myModMask .|. shiftMask,  xK_Left   ),  sendMessage $ Move L)
+    , ((myModMask .|. shiftMask,  xK_Up     ),  sendMessage $ Move U)
+    , ((myModMask .|. shiftMask,  xK_Down   ),  sendMessage $ Move D)
 
     -- Keys for toggling struts
-    , ((myModMask,                xK_b    ),  sendMessage ToggleStruts)
+    , ((myModMask,                xK_b      ),  sendMessage ToggleStruts)
+
+    -- Keys for toggling keyboard layout
+    , ((myModMask,                xK_Escape ),  spawn "/usr/local/bin/layout_switch.sh")
 
     ]
