@@ -56,7 +56,6 @@ myManageHook = composeAll
     , className =? "inkscape"           --> doShift ws_vector
     , className =? "Chromium"           --> doShift ws_web
     , className =? "Firefox"            --> doShift ws_web
-    , className =? "jetbrains-idea-ce"  --> doShift ws_dev
     , className =? "VirtualBox"         --> doFloat
     , className =? "Xmessage"           --> doFloat
     , className =? "XCalc"              --> doFloat
