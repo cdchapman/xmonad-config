@@ -6,7 +6,6 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.ICCCMFocus
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.DragPane
@@ -29,9 +28,6 @@ myTerminal = "urxvtc"
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
-
--- Fixes JAVA Swing applications with taking and losing focus.
-myLogHook = takeTopFocus
 
 -- Convinces JAVA Swing applications that I am using Project Looking Glass
 myStartupHook = setWMName "LG3D"
@@ -93,7 +89,6 @@ main = do
                 { ppOutput = hPutStrLn xmproc
                 , ppTitle = xmobarColor "green" "" . shorten 50
                 } 
-            myLogHook
     , startupHook = myStartupHook
     }
     `additionalKeys`
