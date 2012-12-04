@@ -65,6 +65,8 @@ myManageHook = composeAll
     , className =? "Synfigstudio"       --> doFloat
     , className =? "fontforge"          --> doFloat
     , className =? "lbe-ui-BrowserApp"  --> doFloat
+    , className =? "Firefox" <&&> resource =? "Dialog" --> doFloat
+    , className =? "Xmessage"           --> doIgnore
     ]
 
 -- layout
