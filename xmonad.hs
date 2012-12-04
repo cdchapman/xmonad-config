@@ -64,6 +64,7 @@ myManageHook = composeAll
     , className =? "CinePaint"          --> doFloat
     , className =? "Synfigstudio"       --> doFloat
     , className =? "fontforge"          --> doFloat
+    , className =? "lbe-ui-BrowserApp"  --> doFloat
     ]
 
 -- layout
