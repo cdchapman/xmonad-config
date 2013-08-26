@@ -62,7 +62,6 @@ myManageHook = composeAll
     , className =? "VirtualBox"         --> doFloat
     , className =? "Xmessage"           --> doFloat
     , className =? "XCalc"              --> doFloat
-    , className =? "draftsight.bin"     --> doFloat
     , className =? "Cinelerra"          --> doFloat
     , className =? "CinePaint"          --> doFloat
     , className =? "Synfigstudio"       --> doFloat
