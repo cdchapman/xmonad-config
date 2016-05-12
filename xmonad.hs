@@ -11,6 +11,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.DragPane
 import XMonad.Layout.Gaps
 import XMonad.Layout.Named
+import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.ThreeColumns
@@ -88,7 +89,7 @@ main = do
     , workspaces = myWorkspaces
     , handleEventHook = fullscreenEventHook
     , manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig
-    , layoutHook = avoidStruts $ myLayout
+    , layoutHook = avoidStruts $ smartBorders $ myLayout
     , logHook = do
             dynamicLogWithPP $ xmobarPP
                 { ppOutput = hPutStrLn xmproc
