@@ -8,6 +8,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.DragPane
 import XMonad.Layout.Gaps
 import XMonad.Layout.Named
@@ -86,7 +87,7 @@ myLayout = tiled ||| Full ||| one ||| three
 
 main = do
   xmproc <- spawnPipe "/usr/bin/xmobar /home/chris/.xmonad/xmobarrc"
-  xmonad $ defaultConfig 
+  xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig 
     { borderWidth = 2
     , modMask = myModMask
     , terminal = myTerminal
@@ -129,5 +130,9 @@ main = do
 
     -- Keys for toggling keyboard layout
     , ((myModMask,                  xK_Escape ),  spawn "layout_switch.sh")
+
+    -- Keys for managing urgencies
+    , ((myModMask,                xK_BackSpace),  focusUrgent)
+    , ((myModMask .|. shiftMask,  xK_BackSpace),  clearUrgents)
 
     ]
