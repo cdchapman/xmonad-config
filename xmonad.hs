@@ -87,7 +87,7 @@ myLayout = tiled ||| Full ||| one ||| three
 
 main = do
   xmproc <- spawnPipe "/usr/bin/xmobar /home/chris/.xmonad/xmobarrc"
-  xmonad $ withUrgencyHook NoUrgencyHook $ def
+  xmonad $ docks $ withUrgencyHook NoUrgencyHook $ def
     { borderWidth = 2
     , modMask = myModMask
     , terminal = myTerminal
