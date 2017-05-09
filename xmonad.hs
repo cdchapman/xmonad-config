@@ -58,7 +58,7 @@ myManageHook = composeAll
     , title     =? "htop"               --> doShift ws_top
     , className =? "Gimp"               --> doShift ws_raster
     , className =? "inkscape"           --> doShift ws_vector
-    , className =? "chromium"           --> doShift ws_web
+    , className =? "Chromium"           --> doShift ws_web
     , className =? "Firefox"            --> doShift ws_web
     , className =? "VirtualBox"         --> doFloat
     , className =? "Xmessage"           --> doFloat
@@ -67,7 +67,12 @@ myManageHook = composeAll
     , className =? "CinePaint"          --> doFloat
     , className =? "Synfigstudio"       --> doFloat
     , className =? "fontforge"          --> doFloat
+    , className =? "xsane"              --> doFloat
     , className =? "lbe-ui-BrowserApp"  --> doFloat
+    , className =? "Cssh"               --> doFloat
+    , className =? "Vncviewer"          --> doFloat
+    , className =? "Ssvnc"              --> doFloat
+    , className =? "weka-gui-GUIChooser" --> doFloat
     , className =? "Firefox" <&&> resource =? "Dialog" --> doFloat
     , className =? "Xmessage"           --> doIgnore
     ]
