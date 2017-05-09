@@ -10,7 +10,7 @@ Config { font = "xft:DejaVu Sans Mono:size=8:antialias=true"
                     , Run Date "%a %b %_d %l:%M" "date" 10
                     , Run Network "wlan0" ["-L","0","-H","32","--normal","green","--high","red"] 10
                     , Run BatteryP ["BAT0"] 
-                             [ "-t", "<acstatus><watts> (<left>%)"
+                             [ "-t", "<acstatus> <watts> (<left>%)"
                              , "-L", "10", "-H", "80", "-p", "3"
                              , "--", "-O", "<fc=green>On</fc> - ", "-o", ""
                              , "-L", "-15", "-H", "-5"
