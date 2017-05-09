@@ -87,14 +87,14 @@ myLayout = tiled ||| Full ||| one ||| three
 
 main = do
   xmproc <- spawnPipe "/usr/bin/xmobar /home/chris/.xmonad/xmobarrc"
-  xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig 
+  xmonad $ withUrgencyHook NoUrgencyHook $ def
     { borderWidth = 2
     , modMask = myModMask
     , terminal = myTerminal
     , focusFollowsMouse = myFocusFollowsMouse
     , workspaces = myWorkspaces
     , handleEventHook = fullscreenEventHook
-    , manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig
+    , manageHook = manageDocks <+> myManageHook <+> manageHook def
     , layoutHook = avoidStruts $ smartBorders $ myLayout
     , logHook = do
             dynamicLogWithPP $ xmobarPP
@@ -109,7 +109,7 @@ main = do
     , ((0,                          xK_Print  ),  spawn "scrot")
 
     -- Keys for Prompts
-    , ((myModMask .|. controlMask,  xK_s      ),  sshPrompt defaultXPConfig)
+    , ((myModMask .|. controlMask,  xK_s      ),  sshPrompt def)
 
     -- Keys for ResizableTall layout
     , ((myModMask,                  xK_a),      sendMessage MirrorShrink)
