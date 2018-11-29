@@ -2,27 +2,32 @@
 -- xmonad config file.
 --
 
+-- Imports
+import Data.Ratio ((%))
+import System.IO
 import XMonad
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
-import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.DragPane
 import XMonad.Layout.Gaps
+import XMonad.Layout.Grid
+import XMonad.Layout.IM
 import XMonad.Layout.Named
 import XMonad.Layout.NoBorders
+import XMonad.Layout.OneBig
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.ResizableTile
-import XMonad.Layout.ThreeColumns
-import XMonad.Layout.OneBig
 import XMonad.Layout.WindowNavigation
 import XMonad.Prompt
 import XMonad.Prompt.Ssh
-import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
-import System.IO
+import XMonad.Util.Run(spawnPipe)
+
+import qualified XMonad.StackSet as W
 
 -- Use windows key for mod
 myModMask = mod4Mask
@@ -76,14 +81,25 @@ myManageHook = composeAll
     , className =? "weka-gui-GUIChooser" --> doFloat
     , className =? "Firefox" <&&> resource =? "Dialog" --> doFloat
     , className =? "Xmessage"           --> doIgnore
+    , className =? "R_x11"              --> doFloat
+    , className =? "Pidgin"             --> doF (W.shift ws_top)
+    , className =? "Pidgin" <&&> role =? "conversation" --> doF (W.swapDown)
     ]
 
+    where
+      role = stringProperty "WM_WINDOW_ROLE"
+
 -- layout
-myLayout = tiled ||| Full ||| one ||| three
+myLayout = onWorkspaces [ ws_dev, ws_webdev ] dev $ onWorkspace ws_top imLayout $ standardLayouts
   where
     tiled = named "Default" (ResizableTall 1 (1/100) (1/2) [])
-    three = named "Buff" (ThreeColMid 1 (3/100) (1/2))
-    one   = named "One Big" (OneBig (11/16) (11/16))
+    dev = named "Dev" (OneBig (11/16) (11/16))
+
+    -- define the list of standardLayouts
+    standardLayouts = tiled ||| Full ||| dev ||| Grid
+
+    -- define a layout for IM (Pidgin)
+    imLayout = withIM (1%6) (Role "buddy_list") standardLayouts
 
 main = do
   xmproc <- spawnPipe "/usr/bin/xmobar /home/chris/.xmonad/xmobarrc"
