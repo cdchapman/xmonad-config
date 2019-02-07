@@ -5,7 +5,7 @@ Config { font = "xft:Droid Sans Mono Slashed for Powerline:size=8:antialias=true
        , lowerOnStart = True
        , alpha = 155
        , overrideRedirect = False
-       , pickBroadest = True
+       , pickBroadest = False
        , commands = [ Run Weather "KLGU" ["-t"," <tempF>F","-L","40","-H","77","--normal","green","--high","red","--low","lightblue"] 36000
                     , Run MultiCpu ["-L","3","-H","50","--normal","green","--high","red"] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
