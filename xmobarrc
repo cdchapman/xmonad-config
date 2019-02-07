@@ -1,14 +1,18 @@
-Config { font = "xft:DejaVu Sans Mono:size=8:antialias=true"
+Config { font = "xft:Droid Sans Mono Slashed for Powerline:size=8:antialias=true:hinting=true"
        , bgColor = "black"
        , fgColor = "grey"
        , position = Top
        , lowerOnStart = True
+       , alpha = 155
+       , overrideRedirect = False
+       , pickBroadest = True
        , commands = [ Run Weather "KLGU" ["-t"," <tempF>F","-L","40","-H","77","--normal","green","--high","red","--low","lightblue"] 36000
                     , Run MultiCpu ["-L","3","-H","50","--normal","green","--high","red"] 10
                     , Run Memory ["-t","Mem: <usedratio>%"] 10
                     , Run Swap [] 10
                     , Run Date "%a %b %_d %l:%M" "date" 10
-                    , Run Network "wlan0" ["-L","0","-H","32","--normal","green","--high","red"] 10
+                    , Run DynNetwork ["-L","0","-H","32","--normal","green","--high","red"] 10
+                    , Run Wireless "wlp2s0" [] 10
                     , Run BatteryP ["BAT0"] 
                              [ "-t", "<acstatus> <watts> (<left>%)"
                              , "-L", "10", "-H", "80", "-p", "3"
@@ -18,9 +22,9 @@ Config { font = "xft:DejaVu Sans Mono:size=8:antialias=true"
                              ]
                              600
                     , Run StdinReader
-                    , Run CommandReader "/usr/bin/ledmon" "LED"
+                    , Run Locks
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ <fc=#ffff00>%LED%</fc> %battery% | %wlan0% | %multicpu% | %memory% * %swap%    <fc=#ee9a00>%date%</fc> | %KLGU%"
+       , template = "%StdinReader% }{ <fc=yellow>%locks%</fc> | %battery% | %dynnetwork% %wlp2s0wi% | %multicpu% | %memory% %swap% | <fc=#ee9a00>%date%</fc> | %KLGU%"
        }
