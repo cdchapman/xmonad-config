@@ -1,30 +1,80 @@
-Config { font = "xft:Droid Sans Mono Slashed for Powerline:size=8:antialias=true:hinting=true"
-       , bgColor = "black"
-       , fgColor = "grey"
-       , position = Top
-       , lowerOnStart = True
-       , alpha = 155
-       , overrideRedirect = False
-       , pickBroadest = False
-       , commands = [ Run Weather "KLGU" ["-t"," <tempF>F","-L","40","-H","77","--normal","green","--high","red","--low","lightblue"] 36000
-                    , Run MultiCpu ["-L","3","-H","50","--normal","green","--high","red"] 10
-                    , Run Memory ["-t","Mem: <usedratio>%"] 10
-                    , Run Swap [] 10
-                    , Run Date "%a %b %_d %l:%M" "date" 10
-                    , Run DynNetwork ["-L","0","-H","32","--normal","green","--high","red"] 10
-                    , Run Wireless "wlp2s0" [] 10
-                    , Run BatteryP ["BAT0"] 
-                             [ "-t", "<acstatus> <watts> (<left>%)"
-                             , "-L", "10", "-H", "80", "-p", "3"
-                             , "--", "-O", "<fc=green>On</fc> - ", "-o", ""
-                             , "-L", "-15", "-H", "-5"
-                             , "-l", "red", "-m", "blue", "-h", "green"
-                             ]
-                             600
-                    , Run StdinReader
-                    , Run Locks
-                    ]
-       , sepChar = "%"
-       , alignSep = "}{"
-       , template = "%StdinReader% }{ <fc=yellow>%locks%</fc> | %battery% | %dynnetwork% %wlp2s0wi% | %multicpu% | %memory% %swap% | <fc=#ee9a00>%date%</fc> | %KLGU%"
-       }
+Config {
+
+  -- appearance
+    font = "xft:Hasklig Medium:pixelsize=10:antialias=true:hinting=true"
+  , additionalFonts = [ "xft:FontAwesome:pixelsize=10:antialias=true:hinting=true" ]
+  , bgColor = "#000000"
+  , fgColor = "#839496"
+  , position = Top
+  , border = BottomB
+  , borderColor =  "#586E75"
+
+  -- layout
+  , pickBroadest = False
+  , sepChar = "%"
+  , alignSep = "}{"
+  , template = " %StdinReader% }{ <fc=#6C71C4>%locks%</fc> %kbd% | %battery% | %dynnetwork% %wlp2s0wi% | %multicpu% | %memory% %swap% | %date% "
+
+  -- plugins
+  , commands =
+
+      -- cpu activity monitor
+      [ Run MultiCpu    [ "--template"      , "<fn=1>\xf085</fn> <total>%"
+                        , "--Low"           , "50"
+                        , "--High"          , "85"
+                        , "--low"           , "#859900"   -- green
+                        , "--normal"        , "#B58900"   -- yellow
+                        , "--high"          , "#CB4B16"   -- orange
+                        ] 10
+
+      -- memory usage monitor
+      , Run Memory      [ "--template"      , "Mem: <usedratio>%" ] 10
+
+      , Run Swap        [] 10
+
+      -- time and date indicator
+      , Run Date        "<fc=#93A1A1><fn=1>\xf073</fn> %a %b %d <fn=1>\xf017</fn> %I:%M%P</fc>" "date" 10
+
+      -- network activity monitor
+      , Run DynNetwork  [ "--template"      , "<dev>: <rx>KB<fn=1>\xf175</fn> <tx>KB<fn=1>\xf176</fn>"
+                        , "--Low"           , "10000"     -- units: byte/s
+                        , "--High"          , "50000"     -- units: byte/s
+                        , "--low"           , "#859900"   -- green
+                        , "--normal"        , "#B58900"   -- yellow
+                        , "--high"          , "#CB4B16"   -- orange
+                        ] 10
+
+      , Run Wireless    "wlp2s0"
+                        [ "--template", "<fn=1>\xf1eb</fn> <essid> <quality>%" ] 10
+
+      , Run BatteryP    ["BAT0"]
+                        [ "--template"      , "<leftipat> <acstatus>"
+                        , "--Low"           , "10"        -- units: %
+                        , "--High"          , "80"        -- units: %
+                        , "--low"           , "#CB4B16"   -- orange
+                        , "--normal"        , "#B58900"   -- yellow
+                        , "--high"          , "#859900"   -- green
+
+                        , "--" -- battery specific options
+                        , "-o" , "<left>% (<timeleft>) <watts>W" -- AC "off"
+                        , "-O" , "<left>% <watts>W"              -- AC "on"
+                        , "-i" , "<left>%"                       -- AC "idle"
+                        , "--off-icon-pattern"  , "<fc=#DC322F><fn=1>\xf240</fn></fc>"
+                        , "--on-icon-pattern"   , "<fc=#DC322F><fn=1>\xf1e6</fn></fc>"
+                        , "--idle-icon-pattern" , "<fc=#859900><fn=1>\xf1e6</fn></fc>"
+
+                        ] 50
+
+      , Run StdinReader
+
+      -- keyboard monitor
+      , Run Locks
+      , Run Kbd         [ ("us(altgr-intl)" , "US")
+                        , ("ua(homophonic)" , "<fc=#005BBB>UA</fc>")
+                        , ("ru(phonetic)"   , "<fc=#D52B1E>RU</fc>")
+                        ]
+      ]
+  }
+
+-- not really haskell, but close enough
+-- vi:syntax=haskell:expandtab:ts=2:shiftwidth=2
