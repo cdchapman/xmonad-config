@@ -28,9 +28,9 @@ Config {
                         ] 10
 
       -- memory usage monitor
-      , Run Memory      [ "--template"      , "Mem: <usedratio>%" ] 10
+      , Run Memory      [ "--template"      , "<fn=1>\xf0e7</fn> <usedratio>%" ] 10
 
-      , Run Swap        [] 10
+      , Run Swap        [ "--template"      , "<fn=1>\xf1c0</fn> <usedratio>%" ] 10
 
       -- time and date indicator
       , Run Date        "<fc=#93A1A1><fn=1>\xf073</fn> %a %b %d <fn=1>\xf017</fn> %I:%M%P</fc>" "date" 10
