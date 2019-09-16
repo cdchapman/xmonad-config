@@ -13,7 +13,7 @@ Config {
   , pickBroadest = False
   , sepChar = "%"
   , alignSep = "}{"
-  , template = " %StdinReader% }{ <fc=#6C71C4>%locks%</fc> %kbd% | %battery% | %dynnetwork% %wlp2s0wi% | %multicpu% | %memory% %swap% | %date% "
+  , template = " %StdinReader% }{ <fc=#268BD2>%locks%</fc> %kbd% | %battery% | %dynnetwork% %wlp2s0wi% | %multicpu% | %memory% %swap% | %date% "
 
   -- plugins
   , commands =
