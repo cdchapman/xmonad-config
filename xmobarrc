@@ -13,7 +13,7 @@ Config {
   , pickBroadest = False
   , sepChar = "%"
   , alignSep = "}{"
-  , template = " %StdinReader% }{ <fc=#268BD2>%locks%</fc> %kbd% | %battery% | %dynnetwork% %wlp2s0wi% | %multicpu% | %memory% %swap% | %date% "
+  , template = " %StdinReader% }{ <fc=#268BD2>%locks%</fc> %kbd% | %alsa:default:Master% | %battery% | %dynnetwork% %wlp2s0wi% | %multicpu% | %memory% %swap% | %date% "
 
   -- plugins
   , commands =
@@ -64,6 +64,20 @@ Config {
                         , "--idle-icon-pattern" , "<fc=#859900><fn=1>\xf1e6</fn></fc>"
 
                         ] 50
+
+      , Run Alsa        "default" "Master"
+                        [ "--template"      , "<status> <volume>%"
+                        , "--low"           , "#859900"   -- green
+                        , "--normal"        , "#B58900"   -- yellow
+                        , "--high"          , "#CB4B16"   -- orange
+
+                        , "--" -- monitor specific options
+                        , "--on"            , "<fn=1>\xf028</fn>"
+                        , "--off"           , "<fn=1>\xf026</fn>"
+                        , "--onc"     , "#859900"                -- green
+                        , "--offc"    , "#839496"                -- base0
+
+                        ]
 
       , Run StdinReader
 
